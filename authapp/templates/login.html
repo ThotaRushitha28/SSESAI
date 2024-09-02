@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/icon/favicon.png' %}">
+    <title>Login and SignUp</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'loginStyle.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("form").submit(function(){
+                alert("DONE");
+            });
+        });
+
+        function showLogin() {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById("reset-form").style.display = "none";
+        }
+
+        function showRegister() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "block";
+            document.getElementById("reset-form").style.display = "none";
+        }
+
+        function showReset() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById("reset-form").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn" onclick="showLogin()" style="color: #fff;">Log In</button>
+            <button type="button" class="toggle-btn" onclick="showRegister()">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="input-group" style="display: block;" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="inp">
+                <img src="{% static 'images/icon/user.png' %}">
+                <input type="text" id="email" name="username" class="input-field" placeholder="Email" style="width: 88%; border:none;" required="required">
+            </div>
+            <div class="inp">
+                <img src="{% static 'images/icon/password.png' %}">
+                <input type="password" id="password" name="password" class="input-field" placeholder="Password" style="width: 88%; border: none;" required="required">
+            </div>
+            <input type="checkbox" class="check-box">Remember Password
+            <button type="submit" class="submit-btn">Log In</button>
+        </form>
+
+        <!-- Registration Form -->
+        <form id="register-form" class="input-group" style="display: none;" method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <input type="text" class="input-field" name="full_name" placeholder="Full Name" required="required">
+            <input type="email" class="input-field" name="email" placeholder="Email Address" required="required">
+            <input type="password" class="input-field" name="password1" placeholder="Create Password" required="required">
+            <input type="password" class="input-field" name="password2" placeholder="Confirm Password" required="required">
+            <input type="checkbox" class="check-box" id="chkAgree">I agree to the Terms & Conditions
+            <button type="submit" id="btnSubmit" class="submit-btn reg-btn">Register</button>
+        </form>
+    </div>
+</body>
+</html>

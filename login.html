@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="images/icon/favicon.png">
+    <title>Login and SignUp</title>
+    <link rel="stylesheet" type="text/css" href="loginStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("form").submit(function(){
+                alert("DONE");
+            });
+        });
+
+        function showLogin() {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById("reset-form").style.display = "none";
+        }
+
+        function showRegister() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "block";
+            document.getElementById("reset-form").style.display = "none";
+        }
+
+        function showReset() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById("reset-form").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn" onclick="showLogin()" style="color: #fff;">Log In</button>
+            <button type="button" class="toggle-btn" onclick="showRegister()">Register</button>
+        </div>
+        <div class="social-icons">
+            <img src="images/icon/fb2.png">
+            <img src="images/icon/insta2.png">
+            <img src="images/icon/tt2.png">
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="input-group" style="display: block;" action="index.html">
+            <div class="inp">
+                <img src="images/icon/user.png"><input type="text" id="email" class="input-field" placeholder="Username or Phone Number" style="width: 88%; border:none;" required="required">
+            </div>
+            <div class="inp">
+                <img src="images/icon/password.png"><input type="password" id="password" class="input-field" placeholder="Password" style="width: 88%; border: none;" required="required">
+            </div>
+            <input type="checkbox" class="check-box">Remember Password
+            <button type="submit" class="submit-btn">Log In</button>
+            
+            <!-- Forgot Password Link -->
+            <div style="text-align: center; margin-top: 10px;">
+                <a href="#" onclick="showReset()" style="color: #007BFF;">Forgot Password?</a>
+            </div>
+        </form>
+
+        <!-- Registration Form -->
+        <form id="register-form" class="input-group" style="display: none;">
+            <input type="text" class="input-field" placeholder="Full Name" required="required">
+            <input type="email" class="input-field" placeholder="Email Address" required="required">
+            <input type="password" class="input-field" placeholder="Create Password" name="psame" required="required">
+            <input type="password" class="input-field" placeholder="Confirm Password" name="psame" required="required">
+            <input type="checkbox" class="check-box" id="chkAgree" onclick="goFurther()">I agree to the Terms & Conditions
+            <button type="submit" id="btnSubmit" class="submit-btn reg-btn">Register</button>
+        </form>
+
+        <!-- Reset Password Form -->
+        <form id="reset-form" class="input-group" style="display: none;" action="index.html">
+            <h2>Reset Password</h2>
+            <input type="email" class="input-field" placeholder="Enter your email address" required="required">
+            <button type="submit" class="submit-btn reg-btn">Reset Password</button>
+            
+            <!-- Back to Login Link -->
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="#" onclick="showLogin()" style="color: #007BFF;">Back to Login</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

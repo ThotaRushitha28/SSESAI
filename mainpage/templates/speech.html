@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>Speech</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/subjects.css' %}">
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+    <header>
+        <div class="nav" id="nav">
+            <div id="logo">
+                <a href="{% url 'mainpage' %}"><img src="{% static 'images/logo.png' %}" style="width: 120px;"></a>
+            </div>
+            <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="{% static 'images/menu.png' %}"></div>
+            <ul id="list-switch">
+                <li><a href="{% url 'mainpage' %}"><img src="{% static 'images/home.png' %}" class="icon">Home</a></li>
+            </ul>
+            <div class="search" id="search-switch">
+                <input type="search" placeholder="Search" class="srch"><button id="srchbtn"><img src="{% static 'images/search.png' %}"></button>
+            </div>
+        </div>
+    </header>
+
+<!-- MAIN Heading of Page -->
+    <div class="title">
+        <span>SPEECH</span>
+        <div class="shortdesc">
+            <p>Improve your speaking skills</p>
+        </div>
+    </div>
+
+<!-- Some KeyWords related to Topic -->
+    <div class="course">
+        <div class="cbox">
+            <div class="det"><a href="{% url 'vocabulary' %}">A1-A2 Vocabulary</a></div>
+            <div class="det"><a href="{% url 'speechspeed' %}">Speech speed</a></div>
+        </div>
+    </div>
+
+<!-- Courses Available -->
+    <div class="inbt">
+        LEARN MORE!!!.......
+    </div>
+
+    <div class="title2" id="connations">
+        <span>Lessons</span>
+        <div class="shortdesc2">
+            <p>Enhance your speaking abilities with these lessons</p>
+        </div>
+    </div>
+    
+    <center>
+        <div class="ccardbox2">
+            {% for i in "12345678"|make_list %}
+            <div class="dcard2"><span class="tag">{{ forloop.counter }}/8</span>
+                <div class="fpart2">
+                    <img src="{% static 'images/lesson'|add:i|add:'.png' %}">
+                    <iframe src="#" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </center>
+    <br><br>
+    <div class="click-me">
+        <a href="#" target="_blank">Click Here to Watch full playlist</a>
+    </div>
+
+<br><br><br><br><br>
+
+<!-- FOOTER -->
+<footer>
+    <p>© {% now "Y" %} IDKWHATIDK</p>            
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>combine words</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+<body class="card container">
+
+<h1 class="fs-4 mt-3">combine and listen</h1>
+
+<p class="row">
+	<input id="lg-code" class="form-control form-control-lg col mt-2 ms-2 me-2 fs-6" type="text" placeholder="ISO language code">
+	<input id="w1" class="form-control form-control-lg col mt-2 ms-2 me-2 fs-6" type="text" placeholder="first word">
+	<input id="w2" class="form-control form-control-lg col mt-2 ms-2 me-2 fs-6" type="text" placeholder="second word">
+	<input id="gen" type="button" class="btn btn-primary btn-lg col ms-2 mt-2 fs-6 me-2" value="Generate audio pair">
+</p>
+
+<p class="row collapse">
+	<audio id="a1" controls class="col"></audio>
+	<audio id="a2" controls class="col"></audio>
+</p>
+
+
+<p class="row">
+	<input id="p1" type="button" class="btn btn-warning btn-lg mt-2 ms-2 me-2 fs-6 col" value="Play first audio">
+	<input id="p2" type="button" class="btn btn-dark btn-lg mt-2 ms-2 me-2 fs-6 col" value="Play second audio">
+</p>
+
+<p class="row">
+	<input id="prandom" type="button" class="btn btn-info btn-lg mt-2 ms-2 me-2 fs-6 col" value="Play random audio">
+</p>
+
+
+<footer class="text-center fst-italic pt-4">
+	<p><a href="https://github.com/met/auduo">Source code</a> available (MIT License). Using Google Translate to generate audio.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script>
+'use strict';
+
+function initUI() {
+	const errmsg_audiopairs = "Generate some audio pairs first.";
+	const errmsg_cannotplay = "There is some problem in audio.\nHave you entered correct lang code?";
+
+	document.getElementById("p1").addEventListener("click", (event) => {
+		let audio = document.getElementById("a1");
+		if (audio.src)
+			audio.play().catch((error) => { alert(errmsg_cannotplay); console.log(error)} );
+		else
+			alert(errmsg_audiopairs);
+	});
+
+	document.getElementById("p2").addEventListener("click", (event) => {
+		let audio = document.getElementById("a2");
+		if (audio.src)
+			audio.play().catch((error) => { alert(errmsg_cannotplay); console.log(error)} );
+		else
+			alert(errmsg_audiopairs);
+	});
+
+	document.getElementById("prandom").addEventListener("click", (event) => {
+		let randomIndex = Math.floor(Math.random() * 2) + 1; // generate 1 or 2
+		console.log(randomIndex);
+
+		let audio = document.getElementById("a" + String(randomIndex));
+
+		if (audio.src)
+			audio.play().catch((error) => { alert(errmsg_cannotplay); console.log(error)} );
+		else
+			alert(errmsg_audiopairs);
+	});
+
+	document.getElementById("gen").addEventListener("click", (event) => {
+		let w1 = document.getElementById("w1").value;
+		let w2 = document.getElementById("w2").value;
+		let lang = document.getElementById("lg-code").value.toLowerCase();
+		let audio1 = document.getElementById("a1");
+		let audio2 = document.getElementById("a2")
+
+		if (w1 === "" || w2 === "" || lang === "") {
+			alert("Cannot generate audio. Please fill all entries first.");
+			return;
+		}
+
+		audio1.src = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${encodeURIComponent(lang)}&q=${encodeURIComponent(w1)}`;
+		audio2.src = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${encodeURIComponent(lang)}&q=${encodeURIComponent(w2)}`;
+
+		let url = new URL(document.location);
+
+		history.replaceState(null, "", `?lc=${encodeURIComponent(lang)}&w1=${encodeURIComponent(w1)}&w2=${encodeURIComponent(w2)}`);
+	});
+
+	window.addEventListener("load", (event) => {
+		let params = new URL(document.location).searchParams;
+
+		if (params.get("lc"))
+			document.getElementById("lg-code").value = params.get("lc");
+
+		if (params.get("w1"))
+			document.getElementById("w1").value = params.get("w1");
+
+		if (params.get("w2"))
+			document.getElementById("w2").value = params.get("w2");
+
+	});
+}
+
+initUI();
+</script>

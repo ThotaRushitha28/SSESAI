@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" type="image/png" href="{% static 'images/icon/favicon.png' %}">
+	<title>Tests</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/quizStyle.css' %}">
+</head>
+<body>
+	
+<!-- NAVIGATION -->
+	<header>
+		<div class="nav" id="nav">
+			<div id="learned-logo">
+			<a href="{% url 'mainpage' %}"><img src="{% static 'images/icon/logo.png' %}" style="width: 120px;"></a></div>
+			<div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="{% static 'images/icon/menu.png' %}"></div>
+			<ul id="list-switch">
+				<li><a href="#"><img src="#" class="icon">name</a></li>
+				
+			</ul>
+			<div class="search" id="search-switch">
+				<input type="search" placeholder="Search" class="srch"><button id="srchbtn"><img src="{% static 'images/icon/search.png' %}"></button>
+			</div>
+		</div>
+	</header>
+	
+
+<!-- MAIN Heading of Page -->
+	<div class="title" id="title">
+		<span>Daily Tests</span>
+		<div class="shortdesc"><br>
+			<p>If you think education is expensive, try ignorance</p>
+		</div>
+		<button onclick="startquiz()">Start Now</button>
+	</div>
+
+
+	<div class="panel" id="panel">
+	
+		<div class="left-side" id="left">
+			<ul>
+				<li onclick="quizt(1)">HOME</li>
+				<li onclick="quizt(2)">Vocabulary</li>
+				<li onclick="quizt(3)">Speaking</li>
+	
+			</ul>
+		</div>
+	
+		<div class="right-side" id="right">
+			<div id="quiz-container">
+				
+				<div id="f1"><div class="quiz-frame main-frame"></div></div>
+	
+				<div id="f2"><iframe class="quiz-frame" src="https://forms.gle/RqhMoaXG57EWmwYr6" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe></div>
+				
+				<div id="f3"><iframe class="quiz-frame" src="https://form.jotform.com/242454953642461" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe></div>
+				
+				
+			</div>
+		</div>
+	
+	</div>
+
+
+
+	<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
